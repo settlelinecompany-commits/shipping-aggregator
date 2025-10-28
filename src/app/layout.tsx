@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -9,8 +9,6 @@ export const metadata: Metadata = {
   description: "Compare shipping rates from top UAE carriers, track your packages in real-time, and enjoy seamless delivery experiences across all Emirates.",
   keywords: "shipping UAE, package delivery, courier service, UAE logistics, package tracking",
   authors: [{ name: "ShipUAE Team" }],
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#3b82f6",
   openGraph: {
     title: "ShipUAE - UAE's Leading Shipping Platform",
     description: "Compare shipping rates from top UAE carriers, track your packages in real-time, and enjoy seamless delivery experiences across all Emirates.",
@@ -22,6 +20,12 @@ export const metadata: Metadata = {
     title: "ShipUAE - UAE's Leading Shipping Platform",
     description: "Compare shipping rates from top UAE carriers, track your packages in real-time, and enjoy seamless delivery experiences across all Emirates.",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#3b82f6",
 };
 
 export default function RootLayout({
