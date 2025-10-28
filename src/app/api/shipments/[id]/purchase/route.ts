@@ -4,10 +4,11 @@ import { generateTrackingNumber } from '@/lib/dummy-data'
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const shipmentId = parseInt(params.id)
+    const { id } = await params
+    const shipmentId = parseInt(id)
 
     if (isNaN(shipmentId)) {
       return NextResponse.json(
