@@ -1,26 +1,58 @@
 {
   "name": "shipping-aggregator",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "UAE's Leading Shipping Platform - Compare rates, track packages, and manage deliveries across all Emirates",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "build:analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.16",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.11.17",
+    "lucide-react": "^0.548.0",
+    "next": "16.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
-    "next": "16.0.0"
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss": "^4.1.16"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "16.0.0"
-  }
+    "eslint-config-next": "16.0.0",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "keywords": [
+    "shipping",
+    "uae",
+    "logistics",
+    "package-delivery",
+    "courier-service",
+    "nextjs",
+    "react",
+    "tailwindcss",
+    "typescript"
+  ],
+  "author": "ShipUAE Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/shipping-aggregator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/shipping-aggregator/issues"
+  },
+  "homepage": "https://shipping-aggregator.vercel.app"
 }
