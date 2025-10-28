@@ -106,22 +106,30 @@ export default function OrdersPage() {
 
   // Handle CSV upload
   const handleCSVUpload = async (file: File) => {
-    const formData = new FormData()
-    formData.append('file', file)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
 
-    const response = await fetch('/api/orders/upload-csv', {
-      method: 'POST',
-      body: formData
-    })
+      const response = await fetch('/api/orders/upload-csv', {
+        method: 'POST',
+        body: formData
+      })
 
-    const result = await response.json()
-    
-    if (result.success) {
-      // Refresh orders
-      await fetchOrders()
+      const result = await response.json()
+      
+      if (result.success) {
+        // Refresh orders
+        await fetchOrders()
+      }
+
+      return result
+    } catch (error) {
+      console.error('CSV upload error:', error)
+      return {
+        success: false,
+        message: `Upload failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+      }
     }
-
-    return result
   }
 
   // Handle order actions

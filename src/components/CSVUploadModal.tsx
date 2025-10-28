@@ -254,6 +254,19 @@ export function CSVUploadModal({ isOpen, onClose, onUpload }: CSVUploadModalProp
                           <div>Total: {uploadResult.results.total}</div>
                           <div>Successful: {uploadResult.results.successful}</div>
                           <div>Failed: {uploadResult.results.failed}</div>
+                          {uploadResult.results.errors && uploadResult.results.errors.length > 0 && (
+                            <div className="mt-2">
+                              <div className="text-sm font-medium text-red-800">Upload Errors:</div>
+                              <ul className="text-sm text-red-700 space-y-1 mt-1">
+                                {uploadResult.results.errors.map((error: string, index: number) => (
+                                  <li key={index} className="flex items-start space-x-2">
+                                    <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                                    <span>{error}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
