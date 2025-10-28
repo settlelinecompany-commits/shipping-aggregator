@@ -12,13 +12,17 @@
     "build:analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.76.1",
     "@tailwindcss/postcss": "^4.1.16",
+    "@types/papaparse": "^5.3.16",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.17",
     "lucide-react": "^0.548.0",
     "next": "16.0.0",
+    "papaparse": "^5.5.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-dropzone": "^14.3.8",
     "tailwind-merge": "^2.5.4",
     "tailwindcss": "^4.1.16"
   },
