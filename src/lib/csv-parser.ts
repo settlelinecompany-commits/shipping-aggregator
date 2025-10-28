@@ -94,9 +94,23 @@ export function parseCSVFile(file: File): Promise<CSVParseResult> {
       skipEmptyLines: true,
       transformHeader: (header) => {
         // Normalize header names to match our expected format
-        return header.toLowerCase()
+        const normalized = header.toLowerCase()
           .replace(/\s+/g, '_')
           .replace(/[^a-z0-9_]/g, '')
+        
+        // Map common variations to our expected column names
+        const headerMap: { [key: string]: string } = {
+          'order_numbe': 'order_number',
+          'customer_na': 'customer_name',
+          'street_line': 'street_line_1',
+          'item_title': 'item_title',
+          'item_weight': 'item_weight',
+          'item_price': 'item_price',
+          'order_weight': 'order_weight',
+          'order_amoun': 'order_amount'
+        }
+        
+        return headerMap[normalized] || normalized
       },
       complete: (results) => {
         const { data, errors } = results
@@ -119,6 +133,9 @@ export function parseCSVFile(file: File): Promise<CSVParseResult> {
         
         // Validate headers
         const headers = Object.keys(data[0] as any)
+        console.log('CSV Headers found:', headers)
+        console.log('Required columns:', REQUIRED_COLUMNS)
+        
         const missingColumns = REQUIRED_COLUMNS.filter(col => !headers.includes(col))
         
         if (missingColumns.length > 0) {
@@ -305,10 +322,10 @@ export function generateCSVTemplate(): string {
     'Item Title',
     'SKU',
     'Quantity',
-    'Item Weight (lb)',
-    'Item Price (USD)',
-    'Order Weight (lb)',
-    'Order Amount (USD)'
+    'Item Weight',
+    'Item Price',
+    'Order Weight',
+    'Order Amount'
   ]
   
   const sampleRow = [
