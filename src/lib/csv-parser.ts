@@ -86,7 +86,69 @@ const OPTIONAL_COLUMNS = [
   'street_line_2'
 ]
 
-// Parse CSV file
+// Parse CSV file (server-side version)
+export function parseCSVFileServer(fileContent: string): CSVParseResult {
+  const results = Papa.parse(fileContent, {
+    header: true,
+    skipEmptyLines: true,
+    transformHeader: (header) => {
+      // Normalize header names to match our expected format
+      const normalized = header.toLowerCase()
+        .replace(/\s+/g, '_')
+        .replace(/[^a-z0-9_]/g, '')
+      
+      // Map common variations to our expected column names
+      const headerMap: { [key: string]: string } = {
+        'order_numbe': 'order_number',
+        'customer_na': 'customer_name',
+        'street_line': 'street_line_1',
+        'item_title': 'item_title',
+        'item_weight': 'item_weight',
+        'item_price': 'item_price',
+        'order_weight': 'order_weight',
+        'order_amoun': 'order_amount'
+      }
+      
+      return headerMap[normalized] || normalized
+    }
+  })
+  
+  const { data, errors } = results
+  
+  if (errors.length > 0) {
+    return {
+      success: false,
+      errors: errors.map(error => `Row ${error.row}: ${error.message}`)
+    }
+  }
+  
+  if (!data || data.length === 0) {
+    return {
+      success: false,
+      errors: ['No data found in CSV file']
+    }
+  }
+  
+  // Validate headers
+  const headers = Object.keys(data[0] as any)
+  console.log('CSV Headers found:', headers)
+  console.log('Required columns:', REQUIRED_COLUMNS)
+  
+  const missingColumns = REQUIRED_COLUMNS.filter(col => !headers.includes(col))
+  
+  if (missingColumns.length > 0) {
+    return {
+      success: false,
+      errors: [`Missing required columns: ${missingColumns.join(', ')}`]
+    }
+  }
+  
+  // Parse and validate data
+  const parseResult = parseCSVData(data as any[])
+  return parseResult
+}
+
+// Parse CSV file (client-side version)
 export function parseCSVFile(file: File): Promise<CSVParseResult> {
   return new Promise((resolve) => {
     Papa.parse(file, {
