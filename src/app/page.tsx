@@ -14,6 +14,7 @@ import {
   Shield,
   Globe
 } from 'lucide-react'
+import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 export default function Home() {
@@ -109,14 +110,28 @@ export default function Home() {
               <h1 className="text-2xl font-bold gradient-text">ShipUAE</h1>
             </motion.div>
             
-            <motion.button 
-              className="hidden sm:flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span>Get Started</span>
-              <ArrowRight className="w-4 h-4" />
-            </motion.button>
+            <Link href="/orders">
+              <motion.button 
+                className="hidden sm:flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span>Dashboard</span>
+                <ArrowRight className="w-4 h-4" />
+              </motion.button>
+            </Link>
+            
+            {/* Mobile Dashboard Button */}
+            <Link href="/orders" className="sm:hidden">
+              <motion.button 
+                className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Truck className="w-4 h-4" />
+                <span>Dashboard</span>
+              </motion.button>
+            </Link>
           </div>
         </div>
       </motion.header>
@@ -161,23 +176,27 @@ export default function Home() {
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
               variants={itemVariants}
             >
-              <motion.button 
-                className="btn-primary text-lg px-8 py-4 flex items-center space-x-2"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Truck className="w-5 h-5" />
-                <span>Start Shipping</span>
-              </motion.button>
+              <Link href="/orders">
+                <motion.button 
+                  className="btn-primary text-lg px-8 py-4 flex items-center space-x-2"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Truck className="w-5 h-5" />
+                  <span>Start Shipping</span>
+                </motion.button>
+              </Link>
               
-              <motion.button 
-                className="btn-secondary text-lg px-8 py-4 flex items-center space-x-2"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Package className="w-5 h-5" />
-                <span>Track Package</span>
-              </motion.button>
+              <Link href="/orders">
+                <motion.button 
+                  className="btn-secondary text-lg px-8 py-4 flex items-center space-x-2"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Package className="w-5 h-5" />
+                  <span>View Orders</span>
+                </motion.button>
+              </Link>
             </motion.div>
           </div>
 
@@ -240,14 +259,16 @@ export default function Home() {
               <p className="text-lg text-gray-600 mb-8">
                 Join thousands of satisfied customers who trust ShipUAE for their shipping needs.
               </p>
-              <motion.button 
-                className="btn-accent text-lg px-8 py-4 flex items-center space-x-2 mx-auto"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <span>Get Started Now</span>
-                <ArrowRight className="w-5 h-5" />
-              </motion.button>
+              <Link href="/orders">
+                <motion.button 
+                  className="btn-accent text-lg px-8 py-4 flex items-center space-x-2 mx-auto"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span>Get Started Now</span>
+                  <ArrowRight className="w-5 h-5" />
+                </motion.button>
+              </Link>
             </div>
           </motion.div>
         </div>
