@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
 import {
   Package,
@@ -40,6 +41,7 @@ interface Delivery {
 }
 
 export default function Dashboard() {
+  const router = useRouter()
   const [selectedPeriod, setSelectedPeriod] = useState('Last 30 days')
   const [activeTab, setActiveTab] = useState<'deliveries' | 'recent'>('deliveries')
 
@@ -78,7 +80,7 @@ export default function Dashboard() {
 
   return (
     <DashboardLayout>
-      <div className="p-8 bg-white min-h-screen">
+      <div className="p-8">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
@@ -87,11 +89,17 @@ export default function Dashboard() {
             <p className="text-gray-600">Welcome back, here&apos;s an overview of your shipping activity.</p>
           </div>
           <div className="flex items-center gap-3">
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+            <button 
+              onClick={() => router.push('/orders')}
+              className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+            >
               <Search className="w-4 h-4" />
               <span className="text-sm font-medium">Search shipments</span>
             </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-400 to-purple-500 text-white rounded-lg font-semibold hover:from-sky-500 hover:to-purple-600 transition-all duration-200 shadow-sm hover:shadow-md">
+            <button 
+              onClick={() => router.push('/orders/new')}
+              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-400 to-purple-500 text-white rounded-lg font-semibold hover:from-sky-500 hover:to-purple-600 transition-all duration-200 shadow-sm hover:shadow-md"
+            >
               <Plus className="w-4 h-4" />
               <span>New Shipment</span>
             </button>
